@@ -18,11 +18,14 @@ export default class Todo extends Component {
 
   addItem = () => {
     var values = this.state.listValues;
-    values.push(this.state.value)
-    this.setState({
-      value: '',
-      listValues: values
-    });
+    var value = this.state.value;
+    if (value !== '') {
+      values.push(value)
+      this.setState({
+        value: '',
+        listValues: values
+      });
+    }
   }
 
   removeItem = (itemIndex) => {
@@ -38,7 +41,7 @@ export default class Todo extends Component {
     return (
       <div className="todoBox">
         <h1>Todo List <small>Normal mode</small></h1>
-        <Buttons value={this.state.value} addItem={this.addItem} saveText={this.saveText}/>
+        <Buttons addItem={this.addItem} saveText={this.saveText}/>
         <hr />
         <Rows values={this.state.listValues} removeItem={this.removeItem}/>
       </div>
